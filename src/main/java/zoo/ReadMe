@@ -1,0 +1,40 @@
+Aufgabe 3:
+
+Generics
+
+Vermeidung von Fehlern zur Compile-Zeit:
+Generics verhindern Typ-Inkompatibilitäten beim Befüllen von Gehegen. Ohne Generics müsste man Typ-Castings nutzen,
+die erst zur Laufzeit in einer ClassCastException Fehler werfen können.
+Der Compiler blockiert durch den Bounded Type Parameter <T extends Animal> sofort den Versuch,
+fremde Objekte in ein Gehege zu stecken.
+
+Beispiel aus der Implementierung:
+Aquarium<T extends Fish> zwingt die Typen auf Fische. Ein Versuch wie:
+Aquarium<Lion> aqua = new Aquarium<>("Hai-Becken") führt sofort zu einem Compiler-Fehler.
+Es ist somit nicht möglich, ein Säugetier fälschlicherweise in ein Aquarium zu setzen.
+
+Logging
+
+Vorteile gegenüber System.out.println:
+Granulare Steuerung:
+Log-Level erlauben es, unwichtige Debug-Meldungen im Live-Betrieb abzuschalten, ohne den Code ändern zu müssen.
+Kanaltrennung: Logs können parallel in Dateien geschrieben, rotiert, gefiltert werden
+(println landet unkontrolliert im Standard-Output)
+Metadaten: Logger liefern automatisch Zeitstempel, Klassennamen und Thread-Informationen mit.
+
+Verwendung der Log-Level im System:
+INFO: Für den regulären Betriebsablauf (z.B. "Gehege X wurde erfolgreich eröffnet")
+WARNING: Für unvorhergesehene, aber unkritische Zustände (z.B. "Gehege 'Löwenkäfig' gesucht, aber nicht im System registriert")
+SEVERE: Für kritische Fehler, die das System instabil machen oder auf Datenkorruption hinweisen
+(z.B. wenn null statt eines echten Geheges übergeben wird oder Datenstrukturen inkonsistent sind).
+
+Streams
+
+Vorteile gegenüber klassischen Schleifen:
+Bei Abfragen wie getAllAnimals() (über flatMap) oder getAnimalsByPredicate() erlauben Streams eine kompakte Schreibweise
+Das Filtern und direkte Transformieren (Mapping) reduziert Boilerplate-Code (Code der oft genutzt wird) auf Einzeiler.
+
+Nachteile/Unübersichtlichkeit:
+Bei komplexen mathematischen Aggregationen oder Gruppierungen, wie in countAnimalsByType() mit Collectors.groupingBy,
+wird die Syntax durch verschachtelte Generics und Collector-Aufrufe schnell schwer lesbar.
+Das Debugging ist nicht so einfach wie in einer klassischen for-Schleife.
