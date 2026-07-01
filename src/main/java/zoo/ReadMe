@@ -1,3 +1,12 @@
+Enclosure<?> (Wildcard): Erlaubt es der Zoo-Liste, Gehege für völlig unterschiedliche Tierarten (z. B. Fish und Mammal)
+gemeinsam und typsicher zu verwalten.
+List / Map (Interfaces statt Klassen): Bietet Flexibilität nach außen (Program to an interface).
+Außerdem schützt eine Kopie bei getEnclosures() die internen Zoo-Daten vor Manipulationen von außen.
+Predicate<Animal>: Ermöglicht dem Aufrufer maximale Flexibilität, um Tiere nach beliebigen,
+dynamischen Kriterien (per Lambda-Ausdruck) zu filtern.
+Map<Class<? extends Animal>, Long>: Garantiert eine typsichere Zuordnung der exakten Tierklasse (Schlüssel) zur
+exakten Anzahl der Tiere (Wert).
+
 Aufgabe 3:
 
 Generics
