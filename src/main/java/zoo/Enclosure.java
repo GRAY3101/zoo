@@ -3,6 +3,7 @@ package zoo;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Enclosure<T extends Animal> {
@@ -29,4 +30,15 @@ public class Enclosure<T extends Animal> {
         return new ArrayList<>(inhabitants);
     }
 
+    public Optional<T> findAnimalByName(String animalName){
+        T correctAnimal = null;
+        for(T a : inhabitants) {
+            if(animalName.equals(a.name())){
+                correctAnimal = a;
+                break;
+            }
+        }
+
+        return Optional.ofNullable(correctAnimal);
+    }
 }

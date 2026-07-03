@@ -1,9 +1,6 @@
 package zoo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -69,4 +66,14 @@ public class Zoo {
         return String.format("Zoo mit %d Gehegen und %d Tieren: %d Mammals, %d Birds, %d Fish, %d Reptiles",
                 enclosures.size(), allAnimals.size(), mammalsCount, birdsCount, fishCount, reptilesCount);
     }
+
+    public Optional<Animal> findAnimalByName(String animalName) {
+        return enclosures.stream()
+                .map(enclosure -> enclosure.findAnimalByName(animalName))
+                .flatMap(Optional::stream)
+                .map(animal -> (Animal) animal)
+                .findFirst();
+    }
+
+
 }
